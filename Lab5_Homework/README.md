@@ -8,3 +8,4 @@
    parametru intr-o variabila, la care adaug documentul primit ca al parametru; la final setez documentele din catalog ca fiind variabila prelucrata local.
 5) Pentru comanda save am dat override la functia din Command2, unde cu un obiect ObjectMapper dau write catalogului primit ca parametru, iar path-ul este un String
    primit ca al doilea parametru. 
+6) La final am pus totul intr-un JAR, care a fost salvat by default in folderul out din proiect. Pentru a rula apelez: java -jar lab5_compulsory.jar
