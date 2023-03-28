@@ -4,4 +4,8 @@
 2) Clasa ConfigPanel contine frame-ul, 2 labeluri pentru numarul de puncte si probabilitatea liniilor, un obiect JSpinner care ne va ajuta sa selectam line probability-ul,
    un obiect JComboBox<Double> care va da o lista de tip drop-down cu valori double pentru line probability si un JButton care va permite utilizatorului sa lanseze aplicatia.
    In metoda principala init() am instantiat obiectele de mai sus, iar pentru obiectul JButton am adaugat si un actionListener unde voi crea un canvas si voi seta
-   numarul de puncte si muchii.
+   numarul de puncte si probabilitatea muchiilor.
+3) Clasa DrawingPanel contine frame-ul, rezolutia, nr de puncte si probabilitatea muchiilor. Initializam canvas-ul prin setarea rezolutiei si a marginii. Ca metode 
+   mai am settere pentru nr de puncte si probabilitatea muchiilor. Pentru a desena corespunzator am dat override la paintComponent unde am creat punctele si muchiile pe ecran
+   cu ajutorul functiilor gasite pe "Slides".
+4) In clasa ControlPanel am adaugat butoanele de Load, Save, Exit si Reset care inca nu sunt functionale
