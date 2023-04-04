@@ -6,14 +6,11 @@ import java.util.List;
 
 public class ExplorationMap {
     private final Cell[][] matrix;
-    private final Object[][] locks;
     public ExplorationMap(int n) {
         this.matrix = new Cell[n][n];
-        this.locks = new Object[n][n];
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 matrix[i][j] = new Cell();
-                locks[i][j] = new Object();
             }
         }
         int size = n * n * n;
@@ -22,16 +19,16 @@ public class ExplorationMap {
             Token token = new Token(i);
             tokenValues.add(token);
         }
-        Collections.shuffle(tokenValues);
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
+                Collections.shuffle(tokenValues);
                 matrix[i][j].addTokens(tokenValues);
             }
         }
     }
 
     public boolean visit(int row, int col, Robot robot) {
-        //synchronized (matrix[row][col]) {
+        synchronized (matrix[row][col]) {
             List<Token> tokens = matrix[row][col].getTokens();
             //if (!tokens.isEmpty()) {
             if(!matrix[row][col].isVisited()) {
@@ -49,7 +46,7 @@ public class ExplorationMap {
 
             }
             return false;
-        //}
+        }
     }
 
     @Override

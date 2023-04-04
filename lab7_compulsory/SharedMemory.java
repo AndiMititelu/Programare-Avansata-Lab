@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class SharedMemory {
-    private final List<Token> tokens;
+/*    private final List<Token> tokens;
 
     public SharedMemory(int n) {
         tokens = new ArrayList<>();
@@ -24,5 +24,7 @@ public class SharedMemory {
         }
         return extracted;
     }
+
+ */
 
 }
