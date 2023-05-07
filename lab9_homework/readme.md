@@ -1,1 +1,2 @@
-
+1) Am continuat sa construiesc clasele AlbumRepository si GenreRepository in aceeasi maniera ca la compulsory
+2) Am creat o clasa AbstractRepository folosing generics care are ca atribute un EntityManagerFactory si o clasa generica Class<T>. Clasa are ca metode create-ul si findById si findByName. In continuare m-am folosit de aceasta clasa pentru a reface clasele repo pentru Album, Artist si Genre. Fiecare clasa de repository extinde AbstractRepository la care se adauga si alte metode in functie de caz
