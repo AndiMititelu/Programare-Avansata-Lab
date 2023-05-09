@@ -1,0 +1,3 @@
+1) Intr-un proiect ServerApplication am creat clasele GameServer si ClientThread. Clasa GameServer creaza un socket si asculta pe portul 8100 ce clienti vor sa se conecteze.
+Cand clientul se conecteaza se creaza un nou ClientThread pentru fiecare pentru comunicarea cu clientul. Clasa ClientThread e responsabila pentru comunicarea cu un client conectat. Cand thread-ul e pornit citeste si trimite request-uri catre client, clientul trimite "stop" server-ul e oprit.
+2) Intr-un proiect ClientApplication, clasa GameClient se conecteaza la server si citeste inputul de la tastatura pe care il trimite la server. 
