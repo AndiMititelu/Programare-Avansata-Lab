@@ -11,6 +11,7 @@ public class GameClient {
 
         String serverAddress = "127.0.0.1";
         int PORT = 8100;
+        boolean gameStarted = false;
 
         try {
             Socket socket = new Socket(serverAddress, PORT);
@@ -20,17 +21,18 @@ public class GameClient {
 
 
             while (true) {
-                String command = keyboard.readLine();
-                if (command.equals("exit")) {
-                    break;
+                if(!gameStarted) {
+                    String command = keyboard.readLine();
+                    if (command.equals("exit")) {
+                        break;
+                    }
+                    out.println(command);
                 }
 
-                out.println(command);
+
                 String response = in.readLine();
-                System.out.println(response); //de comentat
+                //System.out.println(response); //de comentat
 
-
-                //--------------- Bulding the gameBoard ------------------------------
 
 
                 if(response.equals("Server started")) {
@@ -47,23 +49,27 @@ public class GameClient {
                     System.out.println("Enter a username...");
                     String username = keyboard.readLine();
                     //BufferedReader username = new BufferedReader(new InputStreamReader(System.in));
-                    System.out.println("Test sending user: " + username);
-                    //sending the username
                     out.println(username);
+                    gameStarted = true;
+                    //System.out.println("Test sending user: " + username);
+                    //sending the username
+
                     //in.readLine(); //BUGGG
                 }
                 else if(response.equals("Game started")) {
-                    System.out.println("Enter (x, y) coordinates to make ur move...");
-                    String move = keyboard.readLine();
-                    out.println(move);
+                    while(true) {
+                        System.out.println("Enter (x, y) coordinates to make ur move...");
+                        String move = keyboard.readLine();
+                        out.println(move);
 
-                    String boardAfterMove = in.readLine();
-                    StringBuilder boardResponse = new StringBuilder();
-                    String line;
-                    while (!(line = in.readLine()).isEmpty()) {
-                        boardResponse.append(line).append("\n");
+                        String boardAfterMove = in.readLine();
+                        StringBuilder boardResponse = new StringBuilder();
+                        String line;
+                        while (!(line = in.readLine()).isEmpty()) {
+                            boardResponse.append(line).append("\n");
+                        }
+                        System.out.println(boardResponse);
                     }
-                    System.out.println(boardResponse);
                 }
             }
         } catch (IOException e) {

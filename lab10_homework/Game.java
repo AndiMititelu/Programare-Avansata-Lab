@@ -54,8 +54,8 @@ public class Game {
         //setting the colors
         if(playerList.get(0) != null)
             playerList.get(0).setColor('B');
-        if(playerList.get(1) != null)
-            playerList.get(1).setColor('W');
+        //if(playerList.get(1) != null)
+            //playerList.get(1).setColor('W');
     }
     public boolean hasWon(Player player) {
         char color = player.getColor();

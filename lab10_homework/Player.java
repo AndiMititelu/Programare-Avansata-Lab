@@ -3,12 +3,9 @@ package org.example;
 public class Player {
     private String name;
     private char color; //culorile vor fi black, white: B & W
-    public Player(String name, char color) {
-        if (color != 'B' && color != 'W') {
-            throw new IllegalArgumentException("Invalid color. Allowed values are 'B' and 'W'.");
-        }
+    public Player(String name) {
         this.name = name;
-        this.color = color;
+        //this.color = color;
     }
 
     public void setColor(char color) {

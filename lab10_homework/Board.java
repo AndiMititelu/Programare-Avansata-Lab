@@ -29,7 +29,7 @@ public class Board {
     }
 
     private boolean isValidMove(int x, int y) {
-        return x >= 0 && x < size && y >= 0 && y < size && board[x][y] == 'O';
+        return x >= 0 && x < size && y >= 0 && y < size && board[x][y] == '*';
     }
 
     @Override

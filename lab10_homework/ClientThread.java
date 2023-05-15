@@ -46,30 +46,35 @@ public class ClientThread extends Thread {
                     //request the client to enter a username
                     out.println("Enter a username...");
 
-                    String requestName = in.readLine(); //wtf is here?
+                    String requestName = in.readLine();
                     System.out.println("CE E AICI: " + requestName);
-                    if(requestName.equals("andi")) {
-                        System.out.println("Am ajuns over here!!!!");
+                    if (requestName.equals("andi")) {
+
                         out.println("Game started");
+                        System.out.println("Am ajuns over here!!!!");
+                        Player player = new Player("andi");
+                        game.join(player);
                     }
+                    while(true) {
 
-                    //Extracting the (x, y) values
-                    String requestMove = in.readLine();
-                    String receivedInput = requestMove;
-                    System.out.println("RecInput: " + receivedInput);
-                    String[] numbers = receivedInput.split(" ");
-                    int[] intNumbers = new int[2];
-                    for (int i = 0; i < 2; i++) {
-                        intNumbers[i] = Integer.parseInt(numbers[i]);
-                        //System.out.println(intNumbers[i]);
+                        //Extracting the (x, y) values
+                        String requestMove = in.readLine();
+                        //String receivedInput = requestMove;
+                        System.out.println("RecInput: " + requestMove);
+                        String[] numbers = requestMove.split(" ");
+                        int[] intNumbers = new int[2];
+                        for (int i = 0; i < 2; i++) {
+                            intNumbers[i] = Integer.parseInt(numbers[i]);
+                            //System.out.println(intNumbers[i]);
+                        }
+
+                        //Making the actual move
+                        game.makeMove(intNumbers[0], intNumbers[1]);
+                        String updatedBoard = game.getBoardString();
+                        System.out.println(game.getBoardString());
+                        out.println(updatedBoard);
+                        System.out.println("AM REALIZAT O MUTARE");
                     }
-
-                    //Making the actual move
-                    game.makeMove(intNumbers[0], intNumbers[1]);
-                    String updatedBoard = game.getBoardString();
-                    System.out.println(game.getBoardString());
-                    out.println(updatedBoard);
-                    System.out.println("AM REALIZAT O MUTARE");
                 }
                 else {
                     response = "Invalid request: " + request;
