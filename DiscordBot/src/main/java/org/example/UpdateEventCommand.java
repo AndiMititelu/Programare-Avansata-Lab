@@ -20,6 +20,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
@@ -73,7 +74,7 @@ public class UpdateEventCommand extends ListenerAdapter {
                     }
                     String subject = foundTimetable.getSubject();
                     if(subject == null) {
-                        privateChannel.sendMessage("No event with that subject!");
+                        privateChannel.sendMessage("No event with that subject!").queue();
                         return;
                     }
                     //------------------------------------------------------------------------------------------------------
@@ -120,7 +121,7 @@ public class UpdateEventCommand extends ListenerAdapter {
                                         .setDescription(
                                                 "Now\n" +
                                                         "In 1 hour\n" +
-                                                        "dd/MM/yyy 17:00");
+                                                        "dd/MM/yyy hh:mm");
                                 privateChannel.sendMessageEmbeds(embedBuilder4.build()).queue();
                                 userInput2 = waitForUserInput(privateChannel);
                                 if (userInput2.equals("now") || userInput2.equals("Now")) {
@@ -130,9 +131,13 @@ public class UpdateEventCommand extends ListenerAdapter {
                                     updatedTimetable.setDay(now);
                                 } else {
                                     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-                                    LocalDateTime dateTime = LocalDateTime.parse(userInput2);
-                                    if (dateTime != null)
+                                    //SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                                    LocalDateTime dateTime = LocalDateTime.parse(userInput2, dtf);
+                                    if (dateTime != null) {
                                         updatedTimetable.setDay(dateTime);
+                                        System.out.println(dateTime);
+                                    }
+
                                 }
                             } else if (userInput2.equals("3")) {
                                 EmbedBuilder embedBuilder5 = new EmbedBuilder()
@@ -178,13 +183,17 @@ public class UpdateEventCommand extends ListenerAdapter {
                     EmbedBuilder embedBuilder4 = new EmbedBuilder()
                             .setTitle(updatedTimetable.getSubject())
                             .setColor(Color.YELLOW)
-                            .setDescription("Time\n" +
-                                    time
+                            .setDescription("Starting at:\n" +
+                                    time + " \n" +
+                                    "Location: " + updatedTimetable.getLocation() + " \n" +
+                                    "Details: " + updatedTimetable.getDetails()
                             )
+                            .setFooter("Updated by: " + updatedTimetable.getUpdatedBy())
                             //.setTimestamp(timetable.getDay())
                             .addField("Accept", acceptedEmoji.getAsReactionCode(), true)
                             .addField("Decline", declinedEmoji.getAsReactionCode(), true);
 
+                    channel.sendMessage("Event updated!").queue();
                     channel.sendMessageEmbeds(embedBuilder4.build()).queue(message -> {
                         message.addReaction(acceptedEmoji).queue();
                         message.addReaction(declinedEmoji).queue();
@@ -192,7 +201,7 @@ public class UpdateEventCommand extends ListenerAdapter {
                 });
                 thread.start();
             } else {
-                privateChannel.sendMessage("No event with this subject was found");
+                privateChannel.sendMessage("No event with this subject was found").queue();
             }
 
         }

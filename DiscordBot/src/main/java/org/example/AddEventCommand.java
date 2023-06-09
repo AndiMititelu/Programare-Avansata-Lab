@@ -106,7 +106,7 @@ public class AddEventCommand extends ListenerAdapter {
                             try {
                                 userDate = new SimpleDateFormat("dd/MM/yyyy HH:mm").parse(userInput);
                                 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-                                LocalDateTime dateTime = LocalDateTime.parse(userInput);
+                                LocalDateTime dateTime = LocalDateTime.parse(userInput, dtf);
                                 if(dateTime != null)
                                     timetable.setDay(dateTime);
                             } catch (ParseException e) {
@@ -147,9 +147,7 @@ public class AddEventCommand extends ListenerAdapter {
                         timetable.setCreatedAt(now);
                         timetable.setUpdatedAt(now);
                         timetable.setUpdatedBy(username);
-                        break; //TODO: ??
-
-
+                        break;
                     }
 
                     timetableRepository.create(timetable);
@@ -161,9 +159,12 @@ public class AddEventCommand extends ListenerAdapter {
                     EmbedBuilder embedBuilder4 = new EmbedBuilder()
                             .setTitle(timetable.getSubject())
                             .setColor(Color.YELLOW)
-                            .setDescription("Time\n" +
-                                            time
+                            .setDescription("Starting at:\n" +
+                                            time + " \n" +
+                                            "Location: " + timetable.getLocation() + " \n" +
+                                            "Details: " + timetable.getDetails()
                             )
+                            .setFooter("Created by: " + timetable.getUsername())
                             //.setImage(imageFileName)
                             //.setTimestamp(timetable.getDay())
                             .addField("Accept", acceptedEmoji.getAsReactionCode(), true)
