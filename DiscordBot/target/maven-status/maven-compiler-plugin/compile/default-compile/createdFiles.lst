@@ -1,0 +1,9 @@
+org\example\Bot.class
+org\example\AddEventCommand$1.class
+org\example\UpdateEventCommand$1.class
+org\example\Timetable.class
+org\example\TimetableRepository.class
+org\example\PersistenceManager.class
+org\example\UpdateEventCommand.class
+org\example\BasicCommands.class
+org\example\AddEventCommand.class
